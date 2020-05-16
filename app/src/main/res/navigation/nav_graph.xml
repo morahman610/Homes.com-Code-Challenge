@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/destination_popular_movies">
+
+    <fragment
+        android:id="@+id/destination_popular_movies"
+        android:name="com.example.homescom_code_challenge.PopularMoviesFragment"
+        android:label="fragment_popular_movies"
+        tools:layout="@layout/fragment_popular_movies" >
+        <action
+            android:id="@+id/action_popularMoviesFragment_to_popularTVShowsFragment"
+            app:destination="@id/destination_popular_tv" />
+    </fragment>
+    <fragment
+        android:id="@+id/destination_popular_tv"
+        android:name="com.example.homescom_code_challenge.PopularTVShowsFragment"
+        android:label="fragment_popular_tvshows"
+        tools:layout="@layout/fragment_popular_tvshows" >
+        <action
+            android:id="@+id/action_destination_popular_tv_to_destination_popular_movies"
+            app:destination="@id/destination_popular_movies" />
+    </fragment>
+</navigation>
