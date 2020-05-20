@@ -1,5 +1,6 @@
 package com.example.homescom_code_challenge.ViewModel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,5 +31,11 @@ class PopularMoviesViewModel(val homesRepository : HomesRepository) : ViewModel(
     fun getMovie() : LiveData<MovieResult> {
         return selectedMovie
     }
+
+    fun cancelJob() {
+        homesRepository.cancelJob()
+    }
+
+    fun upsertMovie(movies: List<MovieResult>, context: Context) = homesRepository(context).upsertMovie(movies)
 
 }

@@ -2,6 +2,7 @@ package com.example.homescom_code_challenge.View
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,10 +59,10 @@ class MovieDetailFragment : Fragment() {
 
         popularMoviesViewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(PopularMoviesViewModel::class.java)
 
-        popularMoviesViewModel.getMovie().observe(this, Observer {
+     /*   popularMoviesViewModel.getMovie().observe(this, Observer {
             val selectedMovie = it
             initializeUI(selectedMovie)
-        })
+        }) */
 
     }
 }

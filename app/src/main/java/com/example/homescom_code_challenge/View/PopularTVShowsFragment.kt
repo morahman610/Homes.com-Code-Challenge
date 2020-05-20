@@ -28,7 +28,7 @@ class PopularTVShowsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_popular_tvshows, container, false)
+        return inflater.inflate(R.layout.fragment_popular, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -44,11 +44,12 @@ class PopularTVShowsFragment : Fragment() {
 
         viewModel.getPopularTVShows().observe(this, Observer {tvShows ->
             initUI(view!!, tvShows)
+            viewModel.upsertShows(requireContext(), tvShows)
         })
     }
 
     private fun initUI(view : View, tvShows : List<TVResult>) {
-        val tvRecyclerView = view.findViewById<RecyclerView>(R.id.popularTVRecyclerView)
+        val tvRecyclerView = view.findViewById<RecyclerView>(R.id.popularRecyclerView)
         val recyclerViewAdapter = TVShowsRecyclerViewAdapter(requireContext(), tvShows)
         tvRecyclerView.adapter = recyclerViewAdapter
         tvRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -59,6 +60,11 @@ class PopularTVShowsFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.cancelJob()
     }
 
 }

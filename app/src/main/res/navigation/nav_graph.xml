@@ -9,7 +9,7 @@
         android:id="@+id/destination_popular_movies"
         android:name="com.example.homescom_code_challenge.View.PopularMoviesFragment"
         android:label="fragment_popular_movies"
-        tools:layout="@layout/fragment_popular_movies" >
+        tools:layout="@layout/fragment_popular" >
         <action
             android:id="@+id/action_popularMoviesFragment_to_popularTVShowsFragment"
             app:destination="@id/destination_popular_tv" />

@@ -32,7 +32,7 @@ class PopularMoviesFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_popular_movies, container, false)
+        return inflater.inflate(R.layout.fragment_popular, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -65,8 +65,13 @@ class PopularMoviesFragment : Fragment() {
         popularMoviesViewModel.getPopularMovies().observe(this, Observer {
             val moviesList = it
             inizializeUI(view!!, moviesList)
+            popularMoviesViewModel.upsertMovie(it, requireContext())
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        popularMoviesViewModel.cancelJob()
+    }
 
 }
