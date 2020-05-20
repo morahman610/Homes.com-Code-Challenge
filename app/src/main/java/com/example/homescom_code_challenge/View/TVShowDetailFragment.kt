@@ -35,8 +35,6 @@ class TVShowDetailFragment : Fragment() {
     }
 
     private fun initializeUI(selectedShow : TVResult) {
-        //   val itemTitleText = fragView.itemTitleTxt
-        //  val movie = popularMoviesViewModel.selectedMovie
         val uri = Uri.parse("https://image.tmdb.org/t/p/w92${selectedShow.poster_path}")
 
         itemTitleTxt.text = selectedShow.name

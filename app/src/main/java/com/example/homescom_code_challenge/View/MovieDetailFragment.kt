@@ -28,9 +28,6 @@ class MovieDetailFragment : Fragment() {
 
         val fragView = inflater.inflate(R.layout.fragment_movie_detail, container, false)
 
-
-    //    initializeUI(fragView)
-
         return fragView
     }
 
@@ -41,8 +38,6 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun initializeUI(selectedMovie : MovieResult) {
-     //   val itemTitleText = fragView.itemTitleTxt
-      //  val movie = popularMoviesViewModel.selectedMovie
         val uri = Uri.parse("https://image.tmdb.org/t/p/w92${selectedMovie.poster_path}")
 
         itemTitleTxt.text = selectedMovie.title
@@ -59,10 +54,10 @@ class MovieDetailFragment : Fragment() {
 
         popularMoviesViewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(PopularMoviesViewModel::class.java)
 
-     /*   popularMoviesViewModel.getMovie().observe(this, Observer {
+        popularMoviesViewModel.getMovie().observe(this, Observer {
             val selectedMovie = it
             initializeUI(selectedMovie)
-        }) */
+        })
 
     }
 }

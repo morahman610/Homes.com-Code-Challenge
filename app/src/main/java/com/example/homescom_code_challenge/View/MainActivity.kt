@@ -1,6 +1,7 @@
 package com.example.homescom_code_challenge.View
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.homescom_code_challenge.BuildConfig
 import com.example.homescom_code_challenge.R
@@ -26,13 +28,27 @@ class MainActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this,
             R.id.nav_host_fragment
         )
+
+
         setupNavMenu(navController)
     }
 
     private fun setupNavMenu(navController: NavController) {
+        val sharedPrefs = this.getSharedPreferences("HOMES_SHARED_PREFS", Context.MODE_PRIVATE)
+        val lastFeature = sharedPrefs.getString("LAST_FEATURE", "PopularMoviesFragment")
+
         nav_menu?.let {
             NavigationUI.setupWithNavController(it, navController)
         }
+
+        if (lastFeature == "PopularTVShowsFragment") {
+            val navHostFragment = nav_host_fragment as NavHostFragment
+            val inflater = navHostFragment.navController.navInflater
+            val graph = inflater.inflate(R.navigation.nav_graph)
+            graph.startDestination = R.id.destination_popular_tv
+            navHostFragment.navController.graph = graph
+        }
+
     }
 
     private fun requestStoragePermission() {

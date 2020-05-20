@@ -1,5 +1,6 @@
 package com.example.homescom_code_challenge.View
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,7 +25,7 @@ import com.example.homescom_code_challenge.ViewModel.PopularTVShowsViewModelFact
 
 class PopularTVShowsFragment : Fragment() {
 
-    private val TAG : String? = "PopularMoviesFragment"
+    private val TAG : String? = "PopularTVShowsFragment"
     private lateinit var viewModel : PopularTVShowsViewModel
     private lateinit var viewModelFactory: PopularTVShowsViewModelFactory
     private lateinit var navController: NavController
@@ -39,6 +40,11 @@ class PopularTVShowsFragment : Fragment() {
 
         navController = Navigation.findNavController(view!!)
         getData()
+
+        val sharedPreference =  context!!.getSharedPreferences("HOMES_SHARED_PREFS", Context.MODE_PRIVATE)
+        val editor = sharedPreference.edit()
+        editor.putString("LAST_FEATURE", TAG)
+        editor.apply()
     }
 
     private fun getData() {

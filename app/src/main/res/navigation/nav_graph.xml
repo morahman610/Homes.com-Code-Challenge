@@ -21,7 +21,7 @@
         android:id="@+id/destination_popular_tv"
         android:name="com.example.homescom_code_challenge.View.PopularTVShowsFragment"
         android:label="fragment_popular_tvshows"
-        tools:layout="@layout/fragment_popular_tvshows" >
+        tools:layout="@layout/fragment_popular" >
         <action
             android:id="@+id/action_destination_popular_tv_to_destination_popular_movies"
             app:destination="@id/destination_popular_movies" />
