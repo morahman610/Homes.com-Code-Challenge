@@ -7,20 +7,32 @@
 
     <fragment
         android:id="@+id/destination_popular_movies"
-        android:name="com.example.homescom_code_challenge.PopularMoviesFragment"
+        android:name="com.example.homescom_code_challenge.View.PopularMoviesFragment"
         android:label="fragment_popular_movies"
         tools:layout="@layout/fragment_popular_movies" >
         <action
             android:id="@+id/action_popularMoviesFragment_to_popularTVShowsFragment"
             app:destination="@id/destination_popular_tv" />
+        <action
+            android:id="@+id/popular_movies_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/destination_popular_tv"
-        android:name="com.example.homescom_code_challenge.PopularTVShowsFragment"
+        android:name="com.example.homescom_code_challenge.View.PopularTVShowsFragment"
         android:label="fragment_popular_tvshows"
         tools:layout="@layout/fragment_popular_tvshows" >
         <action
             android:id="@+id/action_destination_popular_tv_to_destination_popular_movies"
+            app:destination="@id/destination_popular_movies" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.homescom_code_challenge.View.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" >
+        <action
+            android:id="@+id/action_movieDetailFragment_to_destination_popular_movies"
             app:destination="@id/destination_popular_movies" />
     </fragment>
 </navigation>

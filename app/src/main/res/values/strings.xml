@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="popular_movies_lable">Popular Movies</string>
+    <string name="item_image_content_description">Item Image</string>
+    <string name="movie_image_content_desc">Movie Image</string>
 </resources>

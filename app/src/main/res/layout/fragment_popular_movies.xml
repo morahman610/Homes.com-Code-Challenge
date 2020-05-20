@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PopularMoviesFragment">
+    android:orientation="vertical"
+    tools:context=".View.PopularMoviesFragment">
 
     <TextView
+        android:id="@+id/popularMoviesLable"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Movies" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="@string/popular_movies_lable"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/popularMoviesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
