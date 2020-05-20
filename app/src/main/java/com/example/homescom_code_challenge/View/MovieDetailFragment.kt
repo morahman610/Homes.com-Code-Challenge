@@ -1,15 +1,14 @@
 package com.example.homescom_code_challenge.View
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.homescom_code_challenge.Model.MovieResponse.MovieResult
 
 import com.example.homescom_code_challenge.R
@@ -17,8 +16,6 @@ import com.example.homescom_code_challenge.Repository.HomesRepository
 import com.example.homescom_code_challenge.ViewModel.PopularMoviesViewModel
 import com.example.homescom_code_challenge.ViewModel.PopularMoviesViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
-import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
-import kotlinx.android.synthetic.main.fragment_movie_detail.view.itemAverageVotesTxt
 
 class MovieDetailFragment : Fragment() {
 
@@ -30,21 +27,29 @@ class MovieDetailFragment : Fragment() {
 
         val fragView = inflater.inflate(R.layout.fragment_movie_detail, container, false)
 
-        getDetails()
 
     //    initializeUI(fragView)
 
         return fragView
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        getDetails()
+    }
+
     private fun initializeUI(selectedMovie : MovieResult) {
      //   val itemTitleText = fragView.itemTitleTxt
       //  val movie = popularMoviesViewModel.selectedMovie
+        val uri = Uri.parse("https://image.tmdb.org/t/p/w92${selectedMovie.poster_path}")
+
         itemTitleTxt.text = selectedMovie.title
-   //     itemTitleTxt.text = selectedMovie.title
-   /*     itemOverviewTxt.text = selectedMovie.overview
+        itemTitleTxt.text = selectedMovie.title
+        itemOverviewTxt.text = selectedMovie.overview
         itemAverageVotesTxt.text = selectedMovie.vote_average.toString()
-        itemAirDateTxt.text = selectedMovie.release_date */
+        itemAirDateTxt.text = selectedMovie.release_date
+        Glide.with(this).load(uri).into(itemImage)
 
     }
 

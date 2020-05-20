@@ -9,6 +9,6 @@ interface TMDBService {
     @GET("movie/popular")
     suspend fun getPopularMovies() : MovieResponse
 
-    @GET()
+    @GET("tv/popular")
     suspend fun getPopularTVShows() : TVResponse
 }

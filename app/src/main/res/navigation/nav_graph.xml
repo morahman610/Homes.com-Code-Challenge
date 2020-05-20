@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_destination_popular_tv_to_destination_popular_movies"
             app:destination="@id/destination_popular_movies" />
+        <action
+            android:id="@+id/popular_tv_to_TVShowDetailFragment"
+            app:destination="@id/TVShowDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -34,5 +37,13 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_destination_popular_movies"
             app:destination="@id/destination_popular_movies" />
+    </fragment>
+    <fragment
+        android:id="@+id/TVShowDetailFragment"
+        android:name="com.example.homescom_code_challenge.View.TVShowDetailFragment"
+        android:label="TVShowDetailFragment" >
+        <action
+            android:id="@+id/action_TVShowDetailFragment_to_destination_popular_tv"
+            app:destination="@id/destination_popular_tv" />
     </fragment>
 </navigation>

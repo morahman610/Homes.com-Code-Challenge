@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".View.PopularMoviesFragment">
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/popularMoviesLable"
+        android:id="@+id/fragmentLable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -17,7 +15,7 @@
         android:text="@string/popular_movies_lable"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/popularMoviesRecyclerView"
+        android:id="@+id/popularRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

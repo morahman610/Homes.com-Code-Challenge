@@ -2,13 +2,11 @@ package com.example.homescom_code_challenge.View
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -21,8 +19,6 @@ import com.example.homescom_code_challenge.R
 import com.example.homescom_code_challenge.Repository.HomesRepository
 import com.example.homescom_code_challenge.ViewModel.PopularMoviesViewModel
 import com.example.homescom_code_challenge.ViewModel.PopularMoviesViewModelFactory
-import kotlinx.android.synthetic.main.fragment_popular_movies.*
-import kotlinx.android.synthetic.main.fragment_popular_movies.view.*
 
 class PopularMoviesFragment : Fragment() {
 
@@ -34,8 +30,7 @@ class PopularMoviesFragment : Fragment() {
 
  //   lateinit var moviesList : List<MovieResult>
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.fragment_popular_movies, container, false)
     }
@@ -50,7 +45,7 @@ class PopularMoviesFragment : Fragment() {
     }
 
     private fun inizializeUI(view: View, moviesList : List<MovieResult> ) {
-        val moviesRecyclerView : RecyclerView = view.findViewById(R.id.popularMoviesRecyclerView)
+        val moviesRecyclerView : RecyclerView = view.findViewById(R.id.popularRecyclerView)
         val moviesRecyclerViewAdapter = MoviesRecyclerViewAdapter(requireContext(), moviesList)
         moviesRecyclerView.adapter = moviesRecyclerViewAdapter
         moviesRecyclerView.layoutManager = LinearLayoutManager(context)

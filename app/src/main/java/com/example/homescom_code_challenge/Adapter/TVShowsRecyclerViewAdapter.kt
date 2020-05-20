@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.homescom_code_challenge.Model.MovieResponse.MovieResult
+import com.example.homescom_code_challenge.Model.TVResponse.TVResult
 import com.example.homescom_code_challenge.R
 import kotlinx.android.synthetic.main.listing_item_view.view.*
 
-class MoviesRecyclerViewAdapter(private val context: Context, private val moviesList: List<MovieResult>) :
-    RecyclerView.Adapter<MoviesRecyclerViewAdapter.ViewHolder>() {
+class TVShowsRecyclerViewAdapter(private val context: Context, private val tvShowList: List<TVResult>) :
+    RecyclerView.Adapter<TVShowsRecyclerViewAdapter.ViewHolder>() {
 
     lateinit var mListener: OnItemClickListener
 
@@ -24,16 +24,16 @@ class MoviesRecyclerViewAdapter(private val context: Context, private val movies
     }
 
     override fun getItemCount(): Int {
-        return moviesList.size
+        return tvShowList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = moviesList.get(position)
-        val uri = Uri.parse("https://image.tmdb.org/t/p/w92${movie.poster_path}")
+        val tvShow = tvShowList.get(position)
+        val uri = Uri.parse("https://image.tmdb.org/t/p/w92${tvShow.poster_path}")
 
-        holder.movieNameTxt.text = movie.title
-        holder.voteAverageTxt.text = movie.vote_average.toString()
-        Glide.with(context).load(uri).into(holder.movieImage)
+        holder.tvShowNameTxt.text = tvShow.name
+        holder.voteAverageTxt.text = tvShow.vote_average.toString()
+        Glide.with(context).load(uri).into(holder.tvShowImage)
 
         holder.itemView.setOnClickListener {
             if (position != RecyclerView.NO_POSITION) {
@@ -45,9 +45,9 @@ class MoviesRecyclerViewAdapter(private val context: Context, private val movies
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val movieNameTxt = itemView.listingName
+        val tvShowNameTxt = itemView.listingName
         val voteAverageTxt = itemView.voteAverageTxt
-        val movieImage = itemView.movieImage
+        val tvShowImage = itemView.movieImage
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {

@@ -6,4 +6,5 @@
     <string name="popular_movies_lable">Popular Movies</string>
     <string name="item_image_content_description">Item Image</string>
     <string name="movie_image_content_desc">Movie Image</string>
+    <string name="average_vote_lable">Average Vote</string>
 </resources>
