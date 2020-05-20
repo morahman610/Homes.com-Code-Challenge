@@ -32,6 +32,10 @@ class PopularMoviesViewModel(val homesRepository : HomesRepository) : ViewModel(
         return selectedMovie
     }
 
+    fun searchMovies(query : String) : LiveData<List<MovieResult>> {
+        return homesRepository.searchMovies(query, false, 1)
+    }
+
     fun cancelJob() {
         homesRepository.cancelJob()
     }

@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -51,6 +54,10 @@ class PopularTVShowsFragment : Fragment() {
     private fun initUI(view : View, tvShows : List<TVResult>) {
         val tvRecyclerView = view.findViewById<RecyclerView>(R.id.popularRecyclerView)
         val recyclerViewAdapter = TVShowsRecyclerViewAdapter(requireContext(), tvShows)
+        val searchBtn = view.findViewById<Button>(R.id.searchBtn)
+        val searchEditTxt = view.findViewById<EditText>(R.id.searchEditTxt)
+
+        view.findViewById<TextView>(R.id.fragmentLable).text = getString(R.string.shows_fragment_lable)
         tvRecyclerView.adapter = recyclerViewAdapter
         tvRecyclerView.layoutManager = LinearLayoutManager(context)
         recyclerViewAdapter.setOnItemClickListener(object : TVShowsRecyclerViewAdapter.OnItemClickListener{
@@ -60,6 +67,12 @@ class PopularTVShowsFragment : Fragment() {
             }
 
         })
+
+        searchBtn.setOnClickListener {
+            viewModel.searchTVShows(searchEditTxt.text.toString()).observe(this, Observer { tvShows ->
+                initUI(view!!, tvShows)
+            })
+        }
     }
 
     override fun onDestroy() {

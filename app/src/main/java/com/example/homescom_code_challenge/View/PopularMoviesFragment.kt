@@ -6,6 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -24,7 +28,7 @@ class PopularMoviesFragment : Fragment() {
 
     private val TAG : String? = "PopularMoviesFragment"
 
-    private lateinit var popularMoviesViewModel: PopularMoviesViewModel
+    private lateinit var viewModel: PopularMoviesViewModel
     private lateinit var viewModelFactory: PopularMoviesViewModelFactory
     private lateinit var navController : NavController
 
@@ -47,31 +51,41 @@ class PopularMoviesFragment : Fragment() {
     private fun inizializeUI(view: View, moviesList : List<MovieResult> ) {
         val moviesRecyclerView : RecyclerView = view.findViewById(R.id.popularRecyclerView)
         val moviesRecyclerViewAdapter = MoviesRecyclerViewAdapter(requireContext(), moviesList)
+        val searchBtn = view.findViewById<Button>(R.id.searchBtn)
+        val searchEditTxt = view.findViewById<EditText>(R.id.searchEditTxt)
+
+        view.findViewById<TextView>(R.id.fragmentLable).text = getString(R.string.movies_fragment_lable)
         moviesRecyclerView.adapter = moviesRecyclerViewAdapter
         moviesRecyclerView.layoutManager = LinearLayoutManager(context)
         moviesRecyclerViewAdapter.setOnItemClickListener(object : OnItemClickListener{
             override fun OnItemClicked(position: Int) {
-                popularMoviesViewModel.selectMovie(moviesList.get(position))
+                viewModel.selectMovie(moviesList.get(position))
                 navController.navigate(R.id.popular_movies_to_movieDetailFragment)
             }
         })
+
+        searchBtn.setOnClickListener {
+            viewModel.searchMovies(searchEditTxt.text.toString()).observe(this, Observer { movies ->
+                inizializeUI(view!!, movies)
+            })
+        }
     }
 
     private fun getData() {
         viewModelFactory = PopularMoviesViewModelFactory(HomesRepository)
 
-        popularMoviesViewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(PopularMoviesViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(PopularMoviesViewModel::class.java)
 
-        popularMoviesViewModel.getPopularMovies().observe(this, Observer {
+        viewModel.getPopularMovies().observe(this, Observer {
             val moviesList = it
             inizializeUI(view!!, moviesList)
-            popularMoviesViewModel.upsertMovie(it, requireContext())
+            viewModel.upsertMovie(it, requireContext())
         })
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        popularMoviesViewModel.cancelJob()
+        viewModel.cancelJob()
     }
 
 }

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <TextView
@@ -12,8 +13,25 @@
         android:padding="10dp"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:paddingVertical="10dp"
         android:text="@string/popular_movies_lable"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp">
+        <EditText
+            android:id="@+id/searchEditTxt"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_edit_txt"/>
+        <Button
+            android:id="@+id/searchBtn"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="@string/search_btn"/>
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/popularRecyclerView"
         android:layout_width="match_parent"

@@ -28,6 +28,10 @@ class PopularTVShowsViewModel(val homesRepository : HomesRepository) : ViewModel
         return selectedTVShow
     }
 
+    fun searchTVShows(query : String) : LiveData<List<TVResult>> {
+        return homesRepository.searchTVShows(query, false, 1)
+    }
+
     fun upsertShows(context: Context, shows : List<TVResult>) {
         homesRepository(context).upsertShows(shows)
     }

@@ -7,4 +7,8 @@
     <string name="item_image_content_description">Item Image</string>
     <string name="movie_image_content_desc">Movie Image</string>
     <string name="average_vote_lable">Average Vote</string>
+    <string name="shows_fragment_lable">Popular TV Shows</string>
+    <string name="movies_fragment_lable">Popular Movies</string>
+    <string name="search_btn">Search</string>
+    <string name="search_edit_txt">Search by Title</string>
 </resources>

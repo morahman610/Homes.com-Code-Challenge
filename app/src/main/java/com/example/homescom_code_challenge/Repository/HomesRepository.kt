@@ -12,19 +12,19 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
 object HomesRepository {
+
     private lateinit var movieDAO: MovieDAO
     private lateinit var tvShowDAO: TVShowDAO
+    private var job : CompletableJob? = null
+    private var movies : List<MovieResult> = mutableListOf()
+    private var tvShows : List<TVResult> = mutableListOf()
+
     operator fun invoke(context: Context) : HomesRepository {
 
         movieDAO = HomesDB(context.applicationContext).movieDAO()
         tvShowDAO = HomesDB(context.applicationContext).tvShowDAO()
         return this
     }
-
-    private var job : CompletableJob? = null
-
-    private var movies : List<MovieResult> = mutableListOf()
-    private var tvShows : List<TVResult> = mutableListOf()
 
     fun getPopularMovies() : LiveData<List<MovieResult>> {
         job = Job()
@@ -56,6 +56,38 @@ object HomesRepository {
                         tvShows = APIServiceProvider.tmdbService.getPopularTVShows().results
                         withContext(Main) {
                             value = tvShows
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun searchTVShows(query : String, includeAdult : Boolean, page : Int) : LiveData<List<TVResult>> {
+        return object : LiveData<List<TVResult>>() {
+            override fun onActive() {
+                super.onActive()
+                job?.let { job ->
+                    CoroutineScope(IO + job).launch {
+                        tvShows = APIServiceProvider.tmdbService.searchTVShows(query,page,includeAdult).results
+                        withContext(Main) {
+                            value = tvShows
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    fun searchMovies(query : String, includeAdult : Boolean, page : Int) : LiveData<List<MovieResult>> {
+        return object : LiveData<List<MovieResult>>() {
+            override fun onActive() {
+                super.onActive()
+                job?.let { job ->
+                    CoroutineScope(IO + job).launch {
+                        movies = APIServiceProvider.tmdbService.searchMovies(query,page,includeAdult).results
+                        withContext(Main) {
+                            value = movies
                         }
                     }
                 }
